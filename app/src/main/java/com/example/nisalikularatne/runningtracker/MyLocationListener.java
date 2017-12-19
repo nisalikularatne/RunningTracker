@@ -12,7 +12,7 @@ import android.util.Log;
 public class MyLocationListener implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
-        Log.d("g53mdp", location.getLatitude() + " " + location.getLongitude());
+        Log.d("g53mdp","location change" + location.getLatitude() + " " + location.getLongitude());
     }
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
