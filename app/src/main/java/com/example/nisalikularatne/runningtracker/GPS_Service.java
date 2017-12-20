@@ -37,7 +37,29 @@ public class GPS_Service extends Service {
 
         locationManager =
                 (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        locationListener = new MyLocationListener();
+        locationListener =  new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                Intent i = new Intent("location_update");
+                i.putExtra("coordinates", location.getLongitude() + " " + location.getLatitude());
+                sendBroadcast(i);
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+                Log.d(Tag, "onProviderEnabled: " + s);
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+                Log.d(Tag, "onProviderDisabled: " + s);
+            }
+        };
         try {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                     5, // minimum time interval between updates
