@@ -1,4 +1,4 @@
-package com.example.nisalikularatne.runningtracker;
+package com.example.nisalikularatne.runningtracker.Activities;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,14 +15,45 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.nisalikularatne.runningtracker.data.DBHelper;
+import com.example.nisalikularatne.runningtracker.GPS_Service;
+import com.example.nisalikularatne.runningtracker.R;
+import com.example.nisalikularatne.runningtracker.RunnerTracker;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+/**
+ * Created by Nisali Kularatne on 21/12/2017.
+ */
+
+public class NewRunActivity extends AppCompatActivity {
+    DBHelper dbHelper;
+    SQLiteDatabase db;
 
     private TextView textView;
+    private TextView textView2;
+    private Button btn_start;
     private BroadcastReceiver broadcastReceiver;
     private static String Tag;
+    private String distance;
+    private String time;
+    private String date;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.newrun);
+        btn_start = (Button) findViewById(R.id.button3);
+        textView = (TextView) findViewById(R.id.textView);
 
+        if(!runtime_permissions()){
+            enable_buttons();
+        }
+
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -29,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
             broadcastReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-
-                    textView.append("\n" +intent.getExtras().get("coordinates"));
+                   distance = String.valueOf(intent.getExtras().get("coordinates"));
+                    textView.setText("\n" +intent.getExtras().get("coordinates"));
 
                 }
             };
@@ -47,26 +79,37 @@ public class MainActivity extends AppCompatActivity {
         Log.d(Tag,"Destroyed Activity");
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        textView = (TextView) findViewById(R.id.textView);
-        if(!runtime_permissions()){
-            enable_buttons();
-        }
 
-    }
+
     public void stopTrackerApplication(View view) {
+        DBHelper dbHandler = new DBHelper(this, null, null, 1);
         Intent i = new Intent(getApplicationContext(),GPS_Service.class);
+        ((Chronometer) findViewById(R.id.chronometer2)).stop();
         stopService(i);
+        doStuff();
         Log.d("g53mdp","Stop Service");
     }
+    private void doStuff(){
+        DBHelper dbHandler = new DBHelper(this, null, null, 1);
+        double distance = Double.parseDouble(textView.getText().toString());
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        RunnerTracker runnerTracker = new RunnerTracker(distance,date);
 
+        dbHandler.addRunnerTracker(runnerTracker);
 
+        Log.d("g53mdp","Stop Service");
+    }
     private void enable_buttons() {
-        Intent i =new Intent(getApplicationContext(),GPS_Service.class);
-        startService(i);
+        btn_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i =new Intent(getApplicationContext(),GPS_Service.class);
+                ((Chronometer) findViewById(R.id.chronometer2)).start();
+
+                startService(i);
+
+            }
+        });
 
 
     }
@@ -93,4 +136,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 }

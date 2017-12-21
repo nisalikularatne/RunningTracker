@@ -3,35 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.nisalikularatne.runningtracker.MainActivity">
+    tools:context="com.example.nisalikularatne.runningtracker.Activities.MainActivity">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:onClick="onClickStartNewRun"
+        android:text="Start New Run Activity"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/scrollView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/scrollView"
-        android:layout_marginBottom="141dp"
-        android:onClick="stopTrackerApplication"
-        android:text="Stop Service" />
-
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/scrollView"
-        android:layout_centerHorizontal="true"
-        android:foregroundGravity="top|right"
-        android:layout_above="@+id/button"
-        android:layout_alignParentTop="true"
-        android:clickable="true">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Coordinates: "
-            android:id="@+id/textView" />
-    </ScrollView>
-
+        android:layout_alignEnd="@+id/button"
+        android:layout_alignStart="@+id/button"
+        android:layout_below="@+id/button"
+        android:layout_marginTop="76dp"
+        android:onClick="onClickStartRunHistory"
+        android:text="View Run History" />
 </RelativeLayout>
