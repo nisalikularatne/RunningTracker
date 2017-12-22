@@ -8,20 +8,23 @@ public class RunnerTracker {
     private int _id;
     private double _distance;
     private String _Date;
+    private String _time;
 
     public RunnerTracker() {
 
     }
 
-    public RunnerTracker(int id, double distance, String date) {
+    public RunnerTracker(int id, double distance, String date,String time) {
         this._id = id;
         this._distance = distance;
         this._Date = date;
+        this._time=time;
     }
 
-    public RunnerTracker(double distance, String date) {
+    public RunnerTracker(double distance, String date,String time) {
         this._distance = distance;
         this._Date = date;
+        this._time=time;
     }
 
     public void setID(int id) {
@@ -38,6 +41,13 @@ public class RunnerTracker {
 
     public double getRunnerTrackerDistance() {
         return this._distance;
+    }
+    public void setRunnerTrackerTime(String time) {
+        this._time= time;
+    }
+
+    public String getRunnerTrackerTime() {
+        return this._time;
     }
 
     public void setRunnerTrackerDate(String date ) {

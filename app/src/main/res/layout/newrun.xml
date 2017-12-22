@@ -12,6 +12,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="10dp"
         android:layout_marginStart="27dp"
+        android:onClick="startchronometer"
         android:text="Start Run" />
 
     <Button

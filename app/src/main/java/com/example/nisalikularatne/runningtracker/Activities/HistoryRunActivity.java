@@ -32,13 +32,14 @@ public class HistoryRunActivity extends AppCompatActivity {
 
     }
 public void setupView(){
-    Cursor  c = db.rawQuery("select * from RunnerTracker",null);
+    Cursor  c = db.rawQuery("select * from RunnerTracker2",null);
 
     if (c.moveToFirst()) {
         while (!c.isAfterLast()) {
             double distance = c.getDouble(1);
             int id = c.getInt(0);
             String date = c.getString(2);
+            String time = c.getString(3);
             ListView lvItems = (ListView) findViewById(R.id.ListView);
 // Setup cursor adapter using cursor from last step
             CustomDataAdapter todoAdapter = new CustomDataAdapter(this, c);

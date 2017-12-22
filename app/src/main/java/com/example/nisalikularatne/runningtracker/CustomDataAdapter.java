@@ -25,11 +25,14 @@ public class CustomDataAdapter extends CursorAdapter {
         // Find fields to populate in inflated template
         TextView tvBody = (TextView) view.findViewById(R.id.textView5);
         TextView tvPriority = (TextView) view.findViewById(R.id.textView6);
+        TextView timeview = (TextView) view.findViewById(R.id.textView7);
         // Extract properties from cursor
         double distance = cursor.getDouble(cursor.getColumnIndexOrThrow("distance"));
         String date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
+        String time= cursor.getString(cursor.getColumnIndexOrThrow("time"));
         // Populate fields with extracted properties
         tvBody.setText(Double.toString(distance));
         tvPriority.setText(String.valueOf(date));
+        timeview.setText(String.valueOf(time));
     }
 }

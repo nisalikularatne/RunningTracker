@@ -9,9 +9,9 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
         android:onClick="onClickStartNewRun"
         android:text="Start New Run Activity"
+        android:layout_marginTop="128dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -19,10 +19,20 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClickStartRunHistory"
+        android:text="View Run History"
+        android:layout_below="@+id/button"
+        android:layout_marginTop="54dp"
+        android:layout_alignStart="@+id/button5"
+        android:layout_alignEnd="@+id/button5" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/button"
         android:layout_alignStart="@+id/button"
-        android:layout_below="@+id/button"
-        android:layout_marginTop="76dp"
-        android:onClick="onClickStartRunHistory"
-        android:text="View Run History" />
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="49dp"
+        android:text="View Record by Day" />
 </RelativeLayout>

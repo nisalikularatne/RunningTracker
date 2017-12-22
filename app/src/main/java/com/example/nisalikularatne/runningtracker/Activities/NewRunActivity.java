@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,8 @@ import com.example.nisalikularatne.runningtracker.RunnerTracker;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.example.nisalikularatne.runningtracker.R.id.chronometer2;
+
 /**
  * Created by Nisali Kularatne on 21/12/2017.
  */
@@ -42,6 +45,7 @@ public class NewRunActivity extends AppCompatActivity {
     private String distance;
     private String time;
     private String date;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +88,7 @@ public class NewRunActivity extends AppCompatActivity {
     public void stopTrackerApplication(View view) {
         DBHelper dbHandler = new DBHelper(this, null, null, 1);
         Intent i = new Intent(getApplicationContext(),GPS_Service.class);
-        ((Chronometer) findViewById(R.id.chronometer2)).stop();
+        ((Chronometer) findViewById(chronometer2)).stop();
         stopService(i);
         doStuff();
         Log.d("g53mdp","Stop Service");
@@ -92,8 +96,9 @@ public class NewRunActivity extends AppCompatActivity {
     private void doStuff(){
         DBHelper dbHandler = new DBHelper(this, null, null, 1);
         double distance = Double.parseDouble(textView.getText().toString());
+        String time =  ((Chronometer) findViewById(chronometer2)).getText().toString();
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        RunnerTracker runnerTracker = new RunnerTracker(distance,date);
+        RunnerTracker runnerTracker = new RunnerTracker(distance,date,time);
 
         dbHandler.addRunnerTracker(runnerTracker);
 
@@ -104,15 +109,15 @@ public class NewRunActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i =new Intent(getApplicationContext(),GPS_Service.class);
-                ((Chronometer) findViewById(R.id.chronometer2)).start();
-
                 startService(i);
-
+                ((Chronometer) findViewById(chronometer2)).setBase(SystemClock.elapsedRealtime());
+                ((Chronometer) findViewById(chronometer2)).start();
             }
         });
 
 
     }
+
 
     private boolean runtime_permissions() {
         if(Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
