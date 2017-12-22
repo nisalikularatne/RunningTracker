@@ -34,5 +34,7 @@
         android:layout_alignStart="@+id/button"
         android:layout_below="@+id/button2"
         android:layout_marginTop="49dp"
+        android:onClick="onClickStartNewDay"
         android:text="View Record by Day" />
+
 </RelativeLayout>

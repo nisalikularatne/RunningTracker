@@ -34,5 +34,6 @@ public class CustomDataAdapter extends CursorAdapter {
         tvBody.setText(Double.toString(distance));
         tvPriority.setText(String.valueOf(date));
         timeview.setText(String.valueOf(time));
+
     }
 }

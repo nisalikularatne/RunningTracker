@@ -25,6 +25,7 @@
 
         <service android:screenOrientation="portrait"  android:name=".GPS_Service"/>
         <activity android:screenOrientation="portrait" android:name="com.example.nisalikularatne.runningtracker.Activities.NewRunActivity"/>
+        <activity android:screenOrientation="portrait" android:name="com.example.nisalikularatne.runningtracker.Activities.LogsForEachDay"/>
         <activity android:screenOrientation="portrait" android:name="com.example.nisalikularatne.runningtracker.Activities.HistoryRunActivity"/>
     </application>
 
