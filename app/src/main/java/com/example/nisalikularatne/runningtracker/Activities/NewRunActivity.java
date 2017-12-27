@@ -97,12 +97,12 @@ public class NewRunActivity extends AppCompatActivity {
         DBHelper dbHandler = new DBHelper(this, null, null, 1);
         double distance = Double.parseDouble(textView.getText().toString());
         String time =  ((Chronometer) findViewById(chronometer2)).getText().toString();
-        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String date = new SimpleDateFormat("dd--MM--yyyy").format(new Date());
         RunnerTracker runnerTracker = new RunnerTracker(distance,date,time);
 
         dbHandler.addRunnerTracker(runnerTracker);
 
-        Log.d("g53mdp","Stop Service");
+
     }
     private void enable_buttons() {
         btn_start.setOnClickListener(new View.OnClickListener() {

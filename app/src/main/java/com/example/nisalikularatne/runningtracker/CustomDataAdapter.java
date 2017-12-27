@@ -31,9 +31,9 @@ public class CustomDataAdapter extends CursorAdapter {
         String date = cursor.getString(cursor.getColumnIndexOrThrow("date"));
         String time= cursor.getString(cursor.getColumnIndexOrThrow("time"));
         // Populate fields with extracted properties
-        tvBody.setText(Double.toString(distance));
-        tvPriority.setText(String.valueOf(date));
-        timeview.setText(String.valueOf(time));
+        tvBody.setText("Distance:\t"+Double.toString(distance)+"m");
+        tvPriority.setText("Date:\t"+String.valueOf(date));
+        timeview.setText("Time taken to Jog:\t"+String.valueOf(time));
 
     }
 }
